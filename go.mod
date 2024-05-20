@@ -1,4 +1,4 @@
-module github.com/bubenchikus/grpc-proto
+module github.com/bubenchikus/grpc-proto/pb
 
 go 1.22.3
 
