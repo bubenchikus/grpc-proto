@@ -1,0 +1,49 @@
+syntax = "proto3";
+ 
+package proto; 
+ 
+option go_package = "./;pb";
+
+service Service {
+   rpc ImageUpload(stream ImageUploadRequest) returns (ImageUploadResponse);
+
+   rpc ImageGet(ImageGetRequest) returns (stream ImageGetResponse);
+
+   rpc ListGet(ListGetRequest) returns (ListGetResponse);
+}
+
+message ImageInfo {
+  string name = 1;
+  string created = 2;
+  string updated = 3;
+}
+
+message ImageUploadRequest {
+  oneof data {
+    ImageInfo info = 1;
+    bytes chunk = 2;
+  }
+}
+  
+message ImageUploadResponse {
+    string name = 1;
+}
+
+message ImageGetRequest {
+    string name = 1;
+    string dir = 2;
+}
+
+message ImageGetResponse {
+    oneof data {
+    string name = 1;
+    bytes chunk = 2;
+  }
+}
+
+message ListGetRequest {
+}
+
+message ListGetResponse {
+  repeated ImageInfo list = 1;
+} 
